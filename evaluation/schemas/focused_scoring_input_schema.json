@@ -1,0 +1,221 @@
+{
+  "$defs": {
+    "CarrierType": {
+      "enum": [
+        "SPOKEN",
+        "WRITTEN",
+        "INNER_SPEECH",
+        "MEDIATED_REUSE"
+      ],
+      "title": "CarrierType",
+      "type": "string"
+    },
+    "EvidenceSource": {
+      "enum": [
+        "VISIBLE_PROMPT",
+        "GENERATED_TEXT"
+      ],
+      "title": "EvidenceSource",
+      "type": "string"
+    },
+    "EvidenceUnit": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_id": {
+          "pattern": "^[PT][0-9]{3,}$",
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/EvidenceSource"
+        },
+        "text": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "start_char": {
+          "minimum": 0,
+          "title": "Start Char",
+          "type": "integer"
+        },
+        "end_char": {
+          "exclusiveMinimum": 0,
+          "title": "End Char",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "evidence_id",
+        "source",
+        "text",
+        "start_char",
+        "end_char"
+      ],
+      "title": "EvidenceUnit",
+      "type": "object"
+    },
+    "FrozenEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "pattern": "^E[0-9]{3,}$",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "start_codepoint": {
+          "minimum": 0,
+          "title": "Start Codepoint",
+          "type": "integer"
+        },
+        "end_codepoint": {
+          "exclusiveMinimum": 0,
+          "title": "End Codepoint",
+          "type": "integer"
+        },
+        "event_text": {
+          "minLength": 1,
+          "title": "Event Text",
+          "type": "string"
+        },
+        "speaker_or_source_id": {
+          "minLength": 1,
+          "title": "Speaker Or Source Id",
+          "type": "string"
+        },
+        "carrier_type": {
+          "$ref": "#/$defs/CarrierType"
+        },
+        "d1_allowed_evidence_ids": {
+          "items": {
+            "pattern": "^[PT][0-9]{3,}$",
+            "type": "string"
+          },
+          "title": "D1 Allowed Evidence Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "event_id",
+        "start_codepoint",
+        "end_codepoint",
+        "event_text",
+        "speaker_or_source_id",
+        "carrier_type",
+        "d1_allowed_evidence_ids"
+      ],
+      "title": "FrozenEvent",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "run_id": {
+      "minLength": 1,
+      "title": "Run Id",
+      "type": "string"
+    },
+    "prompt_id": {
+      "minLength": 1,
+      "title": "Prompt Id",
+      "type": "string"
+    },
+    "text_id": {
+      "minLength": 1,
+      "title": "Text Id",
+      "type": "string"
+    },
+    "protocol_id": {
+      "const": "csweval_focused_stage_b_input",
+      "default": "csweval_focused_stage_b_input",
+      "title": "Protocol ID",
+      "type": "string"
+    },
+    "source_judge_protocol_id": {
+      "title": "Source Judge Protocol ID",
+      "type": "string",
+      "const": "csweval_focused_quality"
+    },
+    "source_judge_input_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Judge Input Sha256",
+      "type": "string"
+    },
+    "event_manifest_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Event Manifest Sha256",
+      "type": "string"
+    },
+    "visible_prompt": {
+      "minLength": 1,
+      "title": "Visible Prompt",
+      "type": "string"
+    },
+    "normalized_story_text": {
+      "minLength": 1,
+      "title": "Normalized Story Text",
+      "type": "string"
+    },
+    "normalized_story_text_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Normalized Story Text Sha256",
+      "type": "string"
+    },
+    "evidence_units": {
+      "items": {
+        "$ref": "#/$defs/EvidenceUnit"
+      },
+      "minItems": 1,
+      "title": "Evidence Units",
+      "type": "array"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/FrozenEvent"
+      },
+      "minItems": 1,
+      "title": "Events",
+      "type": "array"
+    },
+    "params_id": {
+      "minLength": 1,
+      "title": "Params ID",
+      "type": "string"
+    },
+    "params_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Params Sha256",
+      "type": "string"
+    },
+    "vocabulary_id": {
+      "minLength": 1,
+      "title": "Vocabulary ID",
+      "type": "string"
+    },
+    "vocabulary_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Vocabulary Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "run_id",
+    "prompt_id",
+    "text_id",
+    "source_judge_protocol_id",
+    "source_judge_input_sha256",
+    "event_manifest_sha256",
+    "visible_prompt",
+    "normalized_story_text",
+    "normalized_story_text_sha256",
+    "evidence_units",
+    "events",
+    "params_id",
+    "params_sha256",
+    "vocabulary_id",
+    "vocabulary_sha256"
+  ],
+  "title": "JudgeInput",
+  "type": "object"
+}

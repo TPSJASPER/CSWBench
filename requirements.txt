@@ -1,0 +1,3 @@
+# Annotation → Judge orchestration validates full JSON Schema at each stage.
+# Python 3.11+; OpenAI-compatible HTTP stage transport is standard-library based.
+jsonschema>=4.21,<5

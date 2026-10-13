@@ -1,0 +1,410 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "csweval_extended_scoring_output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocol_id",
+    "params_id",
+    "params_sha256",
+    "blind_document_id",
+    "article_sha256",
+    "judge_model",
+    "manifest_challenges",
+    "prompt_constraint_compliance",
+    "prompt_constraint_evidence_ids",
+    "event_judgments",
+    "whole_text_dimensions",
+    "composite_score",
+    "ranking"
+  ],
+  "properties": {
+    "protocol_id": {
+      "const": "csweval_extended_scoring_output"
+    },
+    "params_id": {
+      "const": "csweval_extended_scoring_params"
+    },
+    "params_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "blind_document_id": {
+      "type": "string",
+      "pattern": "^LJ-B[0-9]{4}$"
+    },
+    "article_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "judge_model": {
+      "enum": [
+        "gpt-5.6-sol",
+        "deepseek-v4-flash"
+      ]
+    },
+    "manifest_challenges": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event_manifest",
+        "evidence_manifest"
+      ],
+      "properties": {
+        "event_manifest": {
+          "$ref": "#/$defs/challenge"
+        },
+        "evidence_manifest": {
+          "$ref": "#/$defs/challenge"
+        }
+      }
+    },
+    "prompt_constraint_compliance": {
+      "enum": [
+        "PASS",
+        "FAIL",
+        "UNCERTAIN"
+      ]
+    },
+    "prompt_constraint_evidence_ids": {
+      "$ref": "#/$defs/evidence_ids"
+    },
+    "event_judgments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/event_judgment"
+      },
+      "minItems": 1
+    },
+    "whole_text_dimensions": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {
+        "$ref": "#/$defs/dimension"
+      },
+      "allOf": [
+        {
+          "contains": {
+            "properties": {
+              "dimension_id": {
+                "const": "M-F1"
+              }
+            },
+            "required": [
+              "dimension_id"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "dimension_id": {
+                "const": "M-F2A"
+              }
+            },
+            "required": [
+              "dimension_id"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "dimension_id": {
+                "const": "M-F2B"
+              }
+            },
+            "required": [
+              "dimension_id"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "dimension_id": {
+                "const": "M-F3.1"
+              }
+            },
+            "required": [
+              "dimension_id"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "dimension_id": {
+                "const": "M-F3.2"
+              }
+            },
+            "required": [
+              "dimension_id"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "dimension_id": {
+                "const": "M-F3.3"
+              }
+            },
+            "required": [
+              "dimension_id"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "dimension_id": {
+                "const": "M-F3.4"
+              }
+            },
+            "required": [
+              "dimension_id"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        }
+      ]
+    },
+    "composite_score": {
+      "const": null
+    },
+    "ranking": {
+      "const": null
+    }
+  },
+  "$defs": {
+    "evidence_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[PT][0-9]{3,}$"
+      }
+    },
+    "challenge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "raised",
+        "reason"
+      ],
+      "properties": {
+        "raised": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "verdict",
+        "evidence_ids",
+        "evidence_strings",
+        "rationale"
+      ],
+      "properties": {
+        "verdict": {
+          "enum": [
+            "PASS",
+            "FAIL"
+          ]
+        },
+        "evidence_ids": {
+          "$ref": "#/$defs/evidence_ids"
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_strings": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "Verbatim evidence_unit texts matching evidence_ids in order."
+        }
+      }
+    },
+    "scored": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "score",
+        "evidence_ids",
+        "evidence_strings",
+        "rationale"
+      ],
+      "properties": {
+        "score": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "evidence_ids": {
+          "$ref": "#/$defs/evidence_ids"
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_strings": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "Verbatim evidence_unit texts matching evidence_ids in order."
+        }
+      }
+    },
+    "event_judgment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event_id",
+        "d1",
+        "d2_overall",
+        "d3_overall",
+        "scene_salience"
+      ],
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "pattern": "^E[0-9]{3,}$"
+        },
+        "d1": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "role",
+            "world"
+          ],
+          "properties": {
+            "role": {
+              "$ref": "#/$defs/gate"
+            },
+            "world": {
+              "$ref": "#/$defs/gate"
+            }
+          }
+        },
+        "d2_overall": {
+          "$ref": "#/$defs/scored"
+        },
+        "d3_overall": {
+          "$ref": "#/$defs/scored"
+        },
+        "scene_salience": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "evidence_ids",
+            "evidence_strings",
+            "rationale"
+          ],
+          "properties": {
+            "label": {
+              "enum": [
+                "S1",
+                "S2",
+                "S3"
+              ]
+            },
+            "evidence_ids": {
+              "$ref": "#/$defs/evidence_ids"
+            },
+            "rationale": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence_strings": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "description": "Verbatim evidence_unit texts matching evidence_ids in order."
+            }
+          }
+        }
+      }
+    },
+    "dimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dimension_id",
+        "score",
+        "evidence_ids",
+        "evidence_strings",
+        "rationale"
+      ],
+      "properties": {
+        "dimension_id": {
+          "enum": [
+            "M-F1",
+            "M-F2A",
+            "M-F2B",
+            "M-F3.1",
+            "M-F3.2",
+            "M-F3.3",
+            "M-F3.4"
+          ]
+        },
+        "score": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "evidence_ids": {
+          "$ref": "#/$defs/evidence_ids"
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_strings": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "Verbatim evidence_unit texts matching evidence_ids in order."
+        }
+      }
+    }
+  }
+}

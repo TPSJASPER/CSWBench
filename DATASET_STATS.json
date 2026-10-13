@@ -1,0 +1,122 @@
+{
+  "focused": {
+    "records": 407,
+    "unique_prompt_ids": 407,
+    "source_dataset": {
+      "ASCEND": 76,
+      "SwitchLingua": 331
+    },
+    "scene_domain": {
+      "休闲与体育": 115,
+      "公共信息与媒体": 78,
+      "学校与教育": 60,
+      "工作与职业": 52,
+      "消费与服务": 26,
+      "朋友与社交": 18,
+      "技术帮助": 16,
+      "文化与身份": 13,
+      "数字交流": 9,
+      "家庭": 8,
+      "健康与医疗": 5,
+      "关系不明确": 4,
+      "交通与出行": 3
+    },
+    "participant_relation": {
+      "朋友": 212,
+      "关系不明确": 92,
+      "同学": 51,
+      "同事": 43,
+      "家人": 8,
+      "陌生人": 1
+    },
+    "interaction_pattern": {
+      "追问": 405,
+      "共同决策": 364,
+      "解释": 239,
+      "立场协商": 145,
+      "信息提供": 134,
+      "反馈": 102,
+      "计划": 92,
+      "分歧": 47,
+      "修复": 37,
+      "情感披露": 35,
+      "误解": 1
+    },
+    "preferred_style": {
+      "SHORT_CLAUSE": 347,
+      "BRIEF_RESPONSE": 313,
+      "MIXED_STYLE": 188,
+      "FULL_CLAUSE_OR_SENTENCE": 162,
+      "EMBEDDED_WORD_OR_PHRASE": 29
+    },
+    "prompt_char_length_min": 359,
+    "prompt_char_length_max": 515,
+    "file_sha256": "19499c43776048b21baf3844ab772e182e1e53360b78a360137bbb04faf0e94c"
+  },
+  "extended": {
+    "records": 400,
+    "unique_prompt_ids": 400,
+    "source_dataset": {
+      "ASCEND": 70,
+      "SwitchLingua": 330
+    },
+    "scene_domain": {
+      "休闲与体育": 93,
+      "公共信息与媒体": 58,
+      "学校与教育": 51,
+      "工作与职业": 45,
+      "消费与服务": 31,
+      "技术帮助": 22,
+      "文化与身份": 21,
+      "朋友与社交": 18,
+      "家庭": 15,
+      "数字交流": 12,
+      "健康与医疗": 11,
+      "交通与出行": 10,
+      "关系不明确": 8,
+      "制度与公共服务": 5
+    },
+    "participant_relation": {
+      "朋友": 189,
+      "关系不明确": 79,
+      "同学": 52,
+      "同事": 49,
+      "家人": 20,
+      "服务人员与用户": 6,
+      "陌生人": 3,
+      "师生": 2
+    },
+    "interaction_pattern": {
+      "追问": 388,
+      "共同决策": 339,
+      "解释": 214,
+      "立场协商": 143,
+      "信息提供": 140,
+      "反馈": 105,
+      "计划": 102,
+      "修复": 55,
+      "分歧": 52,
+      "情感披露": 38,
+      "误解": 6
+    },
+    "preferred_style": {
+      "SHORT_CLAUSE": 317,
+      "BRIEF_RESPONSE": 303,
+      "MIXED_STYLE": 189,
+      "FULL_CLAUSE_OR_SENTENCE": 169,
+      "EMBEDDED_WORD_OR_PHRASE": 50
+    },
+    "prompt_char_length_min": 575,
+    "prompt_char_length_max": 825,
+    "file_sha256": "77593ba83e637d730e1ab3b5b4ac03d4071e7a49e9d100f942231484a2438d43"
+  },
+  "seed_map": {
+    "records": 807,
+    "distinct_seeds": 546,
+    "shared_across_tasks": 261,
+    "focused_only": 146,
+    "extended_only": 139,
+    "sha256": "47b0f322e06e5f3217551fa2016ecab6161af58579f91011f3db57717c1f33e8",
+    "size_bytes": 22617
+  }
+}

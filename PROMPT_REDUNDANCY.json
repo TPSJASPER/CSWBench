@@ -1,0 +1,33 @@
+{
+  "method": "Unicode code-point character 3-gram Jaccard on full prompt_text, without text normalization",
+  "threshold": 0.85,
+  "scope": "Final released Prompt Cards; Unicode character 3-gram Jaccard on full prompt_text",
+  "focused": {
+    "records": 407,
+    "pairs_compared": 82621,
+    "maximum_3gram_jaccard": 0.4035714285714286,
+    "highest_pair": [
+      "PCV4_547",
+      "PCV4_585"
+    ],
+    "pairs_at_or_above_0_85": 0,
+    "min_prompt_chars": 359,
+    "max_prompt_chars": 515,
+    "sha256": "19499c43776048b21baf3844ab772e182e1e53360b78a360137bbb04faf0e94c",
+    "size_bytes": 649642
+  },
+  "extended": {
+    "records": 400,
+    "pairs_compared": 79800,
+    "maximum_3gram_jaccard": 0.6068883610451307,
+    "highest_pair": [
+      "LGPC_0394",
+      "LGPC_0442"
+    ],
+    "pairs_at_or_above_0_85": 0,
+    "min_prompt_chars": 575,
+    "max_prompt_chars": 825,
+    "sha256": "77593ba83e637d730e1ab3b5b4ac03d4071e7a49e9d100f942231484a2438d43",
+    "size_bytes": 1037566
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "$defs": {
+    "CandidateReview": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "pattern": "^C[0-9]{3,}$",
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "label": {
+          "$ref": "#/$defs/CandidateSemanticLabel"
+        },
+        "reason": {
+          "maxLength": 240,
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "label",
+        "reason"
+      ],
+      "title": "CandidateReview",
+      "type": "object"
+    },
+    "CandidateSemanticLabel": {
+      "enum": [
+        "TRUE_CSW",
+        "NON_CSW",
+        "AMBIGUOUS"
+      ],
+      "title": "CandidateSemanticLabel",
+      "type": "string"
+    },
+    "CarrierType": {
+      "enum": [
+        "SPOKEN",
+        "WRITTEN",
+        "INNER_SPEECH",
+        "MEDIATED_REUSE"
+      ],
+      "title": "CarrierType",
+      "type": "string"
+    },
+    "DiscoveryMetadata": {
+      "additionalProperties": false,
+      "properties": {
+        "run_id": {
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        },
+        "prompt_id": {
+          "minLength": 1,
+          "title": "Prompt Id",
+          "type": "string"
+        },
+        "text_id": {
+          "minLength": 1,
+          "title": "Text Id",
+          "type": "string"
+        },
+        "protocol_id": {
+          "const": "csweval_focused_discovery",
+          "title": "Protocol ID",
+          "type": "string"
+        },
+        "params_id": {
+          "minLength": 1,
+          "title": "Params ID",
+          "type": "string"
+        },
+        "params_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Params Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "run_id",
+        "prompt_id",
+        "text_id",
+        "protocol_id",
+        "params_id",
+        "params_sha256"
+      ],
+      "title": "DiscoveryMetadata",
+      "type": "object"
+    },
+    "EventProposal": {
+      "additionalProperties": false,
+      "properties": {
+        "proposal_id": {
+          "minLength": 1,
+          "pattern": "^EP-[A-Za-z0-9._-]+$",
+          "title": "Proposal Id",
+          "type": "string"
+        },
+        "prompt_id": {
+          "minLength": 1,
+          "title": "Prompt Id",
+          "type": "string"
+        },
+        "text_id": {
+          "minLength": 1,
+          "title": "Text Id",
+          "type": "string"
+        },
+        "normalized_story_text_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Normalized Story Text Sha256",
+          "type": "string"
+        },
+        "params_id": {
+          "minLength": 1,
+          "title": "Params ID",
+          "type": "string"
+        },
+        "params_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Params Sha256",
+          "type": "string"
+        },
+        "proposal_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Proposal Sha256",
+          "type": "string"
+        },
+        "status": {
+          "const": "MODEL_DISCOVERED",
+          "title": "Status",
+          "type": "string"
+        },
+        "events": {
+          "items": {
+            "$ref": "#/$defs/ProposedEvent"
+          },
+          "title": "Events",
+          "type": "array"
+        }
+      },
+      "required": [
+        "proposal_id",
+        "prompt_id",
+        "text_id",
+        "normalized_story_text_sha256",
+        "params_id",
+        "params_sha256",
+        "proposal_sha256",
+        "status",
+        "events"
+      ],
+      "title": "EventProposal",
+      "type": "object"
+    },
+    "ProposedEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "pattern": "^E[0-9]{3,}$",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "start_codepoint": {
+          "minimum": 0,
+          "title": "Start Codepoint",
+          "type": "integer"
+        },
+        "end_codepoint": {
+          "exclusiveMinimum": 0,
+          "title": "End Codepoint",
+          "type": "integer"
+        },
+        "speaker_or_source_id": {
+          "minLength": 1,
+          "title": "Speaker Or Source Id",
+          "type": "string"
+        },
+        "carrier_type": {
+          "$ref": "#/$defs/CarrierType"
+        },
+        "candidate_ids": {
+          "items": {
+            "pattern": "^C[0-9]{3,}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Candidate Ids",
+          "type": "array"
+        },
+        "boundary_reason": {
+          "maxLength": 300,
+          "minLength": 1,
+          "title": "Boundary Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "start_codepoint",
+        "end_codepoint",
+        "speaker_or_source_id",
+        "carrier_type",
+        "candidate_ids",
+        "boundary_reason"
+      ],
+      "title": "ProposedEvent",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "metadata": {
+      "$ref": "#/$defs/DiscoveryMetadata"
+    },
+    "candidate_reviews": {
+      "items": {
+        "$ref": "#/$defs/CandidateReview"
+      },
+      "title": "Candidate Reviews",
+      "type": "array"
+    },
+    "event_proposal": {
+      "$ref": "#/$defs/EventProposal"
+    }
+  },
+  "required": [
+    "metadata",
+    "candidate_reviews",
+    "event_proposal"
+  ],
+  "title": "DiscoveryOutput",
+  "type": "object"
+}

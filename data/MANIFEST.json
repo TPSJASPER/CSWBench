@@ -1,0 +1,26 @@
+{
+  "package": "cswbench",
+  "release_status": "FINAL_PROMPT_CARDS",
+  "prompt_counts": {
+    "focused": 407,
+    "extended": 400,
+    "total": 807
+  },
+  "files": {
+    "focused.jsonl": {
+      "records": 407,
+      "size_bytes": 649642,
+      "sha256": "19499c43776048b21baf3844ab772e182e1e53360b78a360137bbb04faf0e94c"
+    },
+    "extended.jsonl": {
+      "records": 400,
+      "size_bytes": 1037566,
+      "sha256": "77593ba83e637d730e1ab3b5b4ac03d4071e7a49e9d100f942231484a2438d43"
+    },
+    "prompt_seed_map.csv": {
+      "records": 807,
+      "size_bytes": 22617,
+      "sha256": "47b0f322e06e5f3217551fa2016ecab6161af58579f91011f3db57717c1f33e8"
+    }
+  }
+}

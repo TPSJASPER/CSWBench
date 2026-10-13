@@ -1,0 +1,410 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "csweval_extended_scoring_input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocol_id",
+    "params_id",
+    "params_sha256",
+    "blind_document_id",
+    "article_sha256",
+    "article_text",
+    "prompt_constraints",
+    "character_registry",
+    "evidence_units",
+    "event_manifest",
+    "evidence_manifest",
+    "event_judgment_contract",
+    "whole_text_dimension_ids",
+    "score_scale",
+    "separate_narrator_profile",
+    "composite_score_requested"
+  ],
+  "properties": {
+    "protocol_id": {
+      "const": "csweval_extended_scoring_input"
+    },
+    "params_id": {
+      "const": "csweval_extended_scoring_params"
+    },
+    "params_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "blind_document_id": {
+      "type": "string",
+      "pattern": "^LJ-B[0-9]{4}$"
+    },
+    "article_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "article_text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "prompt_constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "visible_prompt"
+      ],
+      "properties": {
+        "visible_prompt": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "character_registry": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "required": [
+          "character_slot"
+        ],
+        "properties": {
+          "character_slot": {
+            "enum": [
+              "A",
+              "B"
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "contains": {
+            "properties": {
+              "character_slot": {
+                "const": "A"
+              }
+            },
+            "required": [
+              "character_slot"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "character_slot": {
+                "const": "B"
+              }
+            },
+            "required": [
+              "character_slot"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        }
+      ]
+    },
+    "evidence_units": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/evidence_unit"
+      }
+    },
+    "event_manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protocol_id",
+        "status",
+        "event_count",
+        "events"
+      ],
+      "properties": {
+        "protocol_id": {
+          "const": "csweval_extended_effective_event_scoring_view"
+        },
+        "status": {
+          "const": "FROZEN_FOR_SCORING"
+        },
+        "event_count": {
+          "type": "integer"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/event"
+          }
+        }
+      }
+    },
+    "evidence_manifest": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "protocol_id",
+        "manifest_status",
+        "blind_document_id",
+        "article_sha256",
+        "frozen_evidence",
+        "quality_scores_present",
+        "scoring_allowed"
+      ],
+      "properties": {
+        "protocol_id": {
+          "const": "csweval_extended_evidence_manifest"
+        },
+        "manifest_status": {
+          "const": "READY_FOR_SCORING"
+        },
+        "blind_document_id": {
+          "type": "string",
+          "pattern": "^LJ-B[0-9]{4}$"
+        },
+        "article_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "frozen_evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "prompt_expected_facts",
+            "article_observed_facts",
+            "narrative_system",
+            "character_profiles",
+            "ambiguities"
+          ],
+          "properties": {
+            "prompt_expected_facts": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/frozen_fact"
+              }
+            },
+            "article_observed_facts": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/frozen_fact"
+              }
+            },
+            "narrative_system": {
+              "type": "object"
+            },
+            "character_profiles": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "ambiguities": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/frozen_fact"
+              }
+            }
+          }
+        },
+        "quality_scores_present": {
+          "const": false
+        },
+        "scoring_allowed": {
+          "const": true
+        }
+      }
+    },
+    "event_judgment_contract": {
+      "const": {
+        "d1_dimensions": [
+          "D1.role",
+          "D1.world"
+        ],
+        "d2_internal_checklist": [
+          "D2.1",
+          "D2.2",
+          "D2.3",
+          "D2.4",
+          "D2.5",
+          "D2.6",
+          "D2.7",
+          "D2.8"
+        ],
+        "d2_output_dimension": "D2.overall",
+        "d3_internal_checklist": [
+          "D3.1",
+          "D3.2",
+          "D3.3",
+          "D3.4",
+          "D3.5"
+        ],
+        "d3_output_dimension": "D3.overall",
+        "subdimension_scores_emitted": false,
+        "scene_salience_labels": [
+          "S1",
+          "S2",
+          "S3"
+        ],
+        "scene_salience_numeric_weight": {
+          "S1": 1,
+          "S2": 2,
+          "S3": 3
+        }
+      }
+    },
+    "whole_text_dimension_ids": {
+      "const": [
+        "M-F1",
+        "M-F2A",
+        "M-F2B",
+        "M-F3.1",
+        "M-F3.2",
+        "M-F3.3",
+        "M-F3.4"
+      ]
+    },
+    "score_scale": {
+      "const": {
+        "minimum": 1,
+        "maximum": 5
+      }
+    },
+    "separate_narrator_profile": {
+      "const": false
+    },
+    "composite_score_requested": {
+      "const": false
+    }
+  },
+  "$defs": {
+    "frozen_fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fact_id",
+        "statement",
+        "evidence"
+      ],
+      "properties": {
+        "fact_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "pattern": "^[PT][0-9]{4}$"
+          }
+        }
+      }
+    },
+    "evidence_unit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id",
+        "source",
+        "text",
+        "start_codepoint",
+        "end_codepoint"
+      ],
+      "properties": {
+        "evidence_id": {
+          "type": "string",
+          "pattern": "^[PT][0-9]{3,}$"
+        },
+        "source": {
+          "enum": [
+            "VISIBLE_PROMPT",
+            "ARTICLE"
+          ]
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "start_codepoint": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "end_codepoint": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event_id",
+        "candidate_ids",
+        "start_codepoint",
+        "end_codepoint",
+        "text",
+        "speaker_slot",
+        "scene_id",
+        "d1_allowed_evidence_ids"
+      ],
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "pattern": "^E[0-9]{3,}$"
+        },
+        "candidate_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^C[0-9]{3,}$"
+          }
+        },
+        "start_codepoint": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end_codepoint": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "speaker_slot": {
+          "enum": [
+            "A",
+            "B",
+            "UNKNOWN",
+            "NARRATIVE_VOICE"
+          ]
+        },
+        "scene_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "d1_allowed_evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[PT][0-9]{3,}$"
+          },
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,588 @@
+{
+  "$defs": {
+    "D1Result": {
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "enum": [
+            "PASS",
+            "FAIL"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "world": {
+          "enum": [
+            "PASS",
+            "FAIL"
+          ],
+          "title": "World",
+          "type": "string"
+        }
+      },
+      "required": [
+        "role",
+        "world"
+      ],
+      "title": "D1Result",
+      "type": "object"
+    },
+    "D2Result": {
+      "additionalProperties": false,
+      "properties": {
+        "D2.1": {
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "title": "D2.1",
+          "type": "integer"
+        },
+        "D2.2": {
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "title": "D2.2",
+          "type": "integer"
+        },
+        "D2.3": {
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            "NA",
+            "IE"
+          ],
+          "title": "D2.3"
+        },
+        "D2.4": {
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            "NA",
+            "IE"
+          ],
+          "title": "D2.4"
+        },
+        "D2.5": {
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            "NA",
+            "IE"
+          ],
+          "title": "D2.5"
+        },
+        "D2.6": {
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            "NA",
+            "IE"
+          ],
+          "title": "D2.6"
+        },
+        "D2.7": {
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            "NA",
+            "IE"
+          ],
+          "title": "D2.7"
+        },
+        "D2.8": {
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "title": "D2.8",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "D2.1",
+        "D2.2",
+        "D2.3",
+        "D2.4",
+        "D2.5",
+        "D2.6",
+        "D2.7",
+        "D2.8"
+      ],
+      "title": "D2Result",
+      "type": "object"
+    },
+    "D3Result": {
+      "additionalProperties": false,
+      "properties": {
+        "D3.1": {
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            "NA",
+            "IE"
+          ],
+          "title": "D3.1"
+        },
+        "D3.2": {
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            "NA",
+            "IE"
+          ],
+          "title": "D3.2"
+        },
+        "D3.3": {
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            "NA",
+            "IE"
+          ],
+          "title": "D3.3"
+        },
+        "D3.4": {
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "title": "D3.4",
+          "type": "integer"
+        },
+        "D3.5": {
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            "NA",
+            "IE"
+          ],
+          "title": "D3.5"
+        }
+      },
+      "required": [
+        "D3.1",
+        "D3.2",
+        "D3.3",
+        "D3.4",
+        "D3.5"
+      ],
+      "title": "D3Result",
+      "type": "object"
+    },
+    "EventEvaluation": {
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "pattern": "^E[0-9]{3,}$",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "d1": {
+          "$ref": "#/$defs/D1Result"
+        },
+        "d2": {
+          "$ref": "#/$defs/D2Result"
+        },
+        "d3": {
+          "$ref": "#/$defs/D3Result"
+        },
+        "narrative_salience": {
+          "enum": [
+            "S1",
+            "S2",
+            "S3"
+          ],
+          "title": "Narrative Salience",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "items": {
+            "pattern": "^[PT][0-9]{3,}$",
+            "type": "string"
+          },
+          "maxItems": 8,
+          "minItems": 1,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "summary": {
+          "maxLength": 180,
+          "minLength": 1,
+          "title": "Summary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "d1",
+        "d2",
+        "d3",
+        "narrative_salience",
+        "evidence_ids",
+        "summary"
+      ],
+      "title": "EventEvaluation",
+      "type": "object"
+    },
+    "LiteraryDimensions": {
+      "additionalProperties": false,
+      "properties": {
+        "L1": {
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "title": "L1",
+          "type": "integer"
+        },
+        "L2": {
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "title": "L2",
+          "type": "integer"
+        },
+        "L3": {
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "title": "L3",
+          "type": "integer"
+        },
+        "L4": {
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "title": "L4",
+          "type": "integer"
+        },
+        "L5": {
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "title": "L5",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "L1",
+        "L2",
+        "L3",
+        "L4",
+        "L5"
+      ],
+      "title": "LiteraryDimensions",
+      "type": "object"
+    },
+    "LiteraryEvidenceAnchor": {
+      "additionalProperties": false,
+      "properties": {
+        "dimension": {
+          "enum": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5"
+          ],
+          "title": "Dimension",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "items": {
+            "pattern": "^T[0-9]{3,}$",
+            "type": "string"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "uniqueItems": true,
+          "title": "Evidence Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "dimension",
+        "evidence_ids"
+      ],
+      "title": "LiteraryEvidenceAnchor",
+      "type": "object"
+    },
+    "LiteraryQuality": {
+      "additionalProperties": false,
+      "properties": {
+        "dimensions": {
+          "$ref": "#/$defs/LiteraryDimensions"
+        },
+        "high_score_evidence": {
+          "items": {
+            "$ref": "#/$defs/LiteraryEvidenceAnchor"
+          },
+          "title": "High Score Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "dimensions",
+        "high_score_evidence"
+      ],
+      "title": "LiteraryQuality",
+      "type": "object"
+    },
+    "RunMetadata": {
+      "additionalProperties": false,
+      "properties": {
+        "run_id": {
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        },
+        "prompt_id": {
+          "minLength": 1,
+          "title": "Prompt Id",
+          "type": "string"
+        },
+        "text_id": {
+          "minLength": 1,
+          "title": "Text Id",
+          "type": "string"
+        },
+        "protocol_id": {
+          "const": "csweval_focused_stage_b",
+          "title": "Protocol ID",
+          "type": "string"
+        },
+        "params_id": {
+          "minLength": 1,
+          "title": "Params ID",
+          "type": "string"
+        },
+        "params_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Params Sha256",
+          "type": "string"
+        },
+        "vocabulary_id": {
+          "minLength": 1,
+          "title": "Vocabulary ID",
+          "type": "string"
+        },
+        "vocabulary_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Vocabulary Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "run_id",
+        "prompt_id",
+        "text_id",
+        "protocol_id",
+        "params_id",
+        "params_sha256",
+        "vocabulary_id",
+        "vocabulary_sha256"
+      ],
+      "title": "RunMetadata",
+      "type": "object"
+    },
+    "ScoreException": {
+      "additionalProperties": false,
+      "properties": {
+        "scope": {
+          "enum": [
+            "EVENT",
+            "LITERARY"
+          ],
+          "title": "Scope",
+          "type": "string"
+        },
+        "event_id": {
+          "anyOf": [
+            {
+              "pattern": "^E[0-9]{3,}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Event Id"
+        },
+        "dimension": {
+          "anyOf": [
+            {
+              "enum": [
+                "D1.role",
+                "D1.world",
+                "D2.1",
+                "D2.2",
+                "D2.3",
+                "D2.4",
+                "D2.5",
+                "D2.6",
+                "D2.7",
+                "D2.8",
+                "D3.1",
+                "D3.2",
+                "D3.3",
+                "D3.4",
+                "D3.5"
+              ],
+              "type": "string"
+            },
+            {
+              "enum": [
+                "L1",
+                "L2",
+                "L3",
+                "L4",
+                "L5"
+              ],
+              "type": "string"
+            }
+          ],
+          "title": "Dimension"
+        },
+        "value": {
+          "enum": [
+            1,
+            5,
+            "NA",
+            "IE",
+            "FAIL"
+          ],
+          "title": "Value"
+        },
+        "reason": {
+          "maxLength": 180,
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        },
+        "counterfactual_loss": {
+          "anyOf": [
+            {
+              "maxLength": 240,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Counterfactual Loss"
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[PT][0-9]{3,}$"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "Required on D1 FAIL exceptions; must be a subset of event-time allowlist."
+        }
+      },
+      "required": [
+        "scope",
+        "dimension",
+        "value",
+        "reason"
+      ],
+      "title": "ScoreException",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "metadata": {
+      "$ref": "#/$defs/RunMetadata"
+    },
+    "event_evaluations": {
+      "items": {
+        "$ref": "#/$defs/EventEvaluation"
+      },
+      "title": "Event Evaluations",
+      "type": "array"
+    },
+    "literary_quality": {
+      "$ref": "#/$defs/LiteraryQuality"
+    },
+    "exceptions": {
+      "items": {
+        "$ref": "#/$defs/ScoreException"
+      },
+      "title": "Exceptions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "metadata",
+    "event_evaluations",
+    "literary_quality",
+    "exceptions"
+  ],
+  "title": "JudgeOutput",
+  "type": "object"
+}

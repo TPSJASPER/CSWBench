@@ -1,0 +1,378 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "csweval_extended_evidence_semantic_payload",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_manifest_challenge",
+    "prompt_expected_facts",
+    "article_observed_facts",
+    "narrative_system",
+    "character_profiles",
+    "ambiguities"
+  ],
+  "properties": {
+    "event_manifest_challenge": {
+      "$ref": "#/$defs/challenge"
+    },
+    "prompt_expected_facts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/fact"
+      }
+    },
+    "article_observed_facts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/fact"
+      }
+    },
+    "narrative_system": {
+      "$ref": "#/$defs/narrative_system"
+    },
+    "character_profiles": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "A",
+        "B"
+      ],
+      "properties": {
+        "A": {
+          "$ref": "#/$defs/profile"
+        },
+        "B": {
+          "$ref": "#/$defs/profile"
+        }
+      }
+    },
+    "ambiguities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/fact"
+      }
+    }
+  },
+  "$defs": {
+    "short_text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "nullable_short_text": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^[PT][0-9]{4}$"
+      },
+      "maxItems": 2
+    },
+    "challenge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "raised",
+        "reason"
+      ],
+      "properties": {
+        "raised": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fact_id",
+        "statement",
+        "evidence"
+      ],
+      "properties": {
+        "fact_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "statement": {
+          "$ref": "#/$defs/short_text"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        }
+      }
+    },
+    "character_scene_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "presence",
+        "goal",
+        "knowledge",
+        "emotion",
+        "stance_toward_other",
+        "language_behavior",
+        "change_from_previous",
+        "evidence"
+      ],
+      "properties": {
+        "presence": {
+          "enum": [
+            "PRESENT",
+            "NOT_PRESENT"
+          ]
+        },
+        "goal": {
+          "$ref": "#/$defs/nullable_short_text"
+        },
+        "knowledge": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/short_text"
+          }
+        },
+        "emotion": {
+          "$ref": "#/$defs/nullable_short_text"
+        },
+        "stance_toward_other": {
+          "$ref": "#/$defs/nullable_short_text"
+        },
+        "language_behavior": {
+          "$ref": "#/$defs/nullable_short_text"
+        },
+        "change_from_previous": {
+          "$ref": "#/$defs/short_text"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        }
+      }
+    },
+    "scene": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state_before",
+        "actions",
+        "state_after",
+        "causal_from_previous",
+        "relationship_state",
+        "character_states",
+        "evidence"
+      ],
+      "properties": {
+        "state_before": {
+          "$ref": "#/$defs/short_text"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/short_text"
+          }
+        },
+        "state_after": {
+          "$ref": "#/$defs/short_text"
+        },
+        "causal_from_previous": {
+          "$ref": "#/$defs/nullable_short_text"
+        },
+        "relationship_state": {
+          "$ref": "#/$defs/short_text"
+        },
+        "character_states": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "A",
+            "B"
+          ],
+          "properties": {
+            "A": {
+              "$ref": "#/$defs/character_scene_state"
+            },
+            "B": {
+              "$ref": "#/$defs/character_scene_state"
+            }
+          }
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        }
+      }
+    },
+    "narrative_system": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scenes",
+        "world_facts",
+        "global_causal_summary",
+        "turning_points",
+        "closure_state",
+        "voice_and_focalization"
+      ],
+      "properties": {
+        "scenes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/scene"
+          }
+        },
+        "world_facts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "global_causal_summary": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "turning_points": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/short_text"
+          }
+        },
+        "closure_state": {
+          "$ref": "#/$defs/short_text"
+        },
+        "voice_and_focalization": {
+          "$ref": "#/$defs/short_text"
+        }
+      }
+    },
+    "baseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "goals",
+        "motivations",
+        "knowledge",
+        "abilities",
+        "disposition",
+        "relationship_start_state",
+        "evidence"
+      ],
+      "properties": {
+        "goals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/short_text"
+          }
+        },
+        "motivations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/short_text"
+          }
+        },
+        "knowledge": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/short_text"
+          }
+        },
+        "abilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/short_text"
+          }
+        },
+        "disposition": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/short_text"
+          }
+        },
+        "relationship_start_state": {
+          "$ref": "#/$defs/short_text"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        }
+      }
+    },
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repertoire",
+        "function_mapping",
+        "relationship_mapping",
+        "affect_mapping",
+        "language_arc"
+      ],
+      "properties": {
+        "repertoire": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/short_text"
+          }
+        },
+        "function_mapping": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/short_text"
+          }
+        },
+        "relationship_mapping": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/short_text"
+          }
+        },
+        "affect_mapping": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/short_text"
+          }
+        },
+        "language_arc": {
+          "$ref": "#/$defs/short_text"
+        }
+      }
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "baseline",
+        "language_resources",
+        "meaningful_non_switching",
+        "profile_evidence"
+      ],
+      "properties": {
+        "baseline": {
+          "$ref": "#/$defs/baseline"
+        },
+        "language_resources": {
+          "$ref": "#/$defs/resources"
+        },
+        "meaningful_non_switching": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fact"
+          }
+        },
+        "profile_evidence": {
+          "$ref": "#/$defs/evidence"
+        }
+      }
+    }
+  }
+}

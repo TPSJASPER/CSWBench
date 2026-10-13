@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "csweval_extended_event_discovery_output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocol_id", "blind_document_id", "article_sha256", "judge_model", "manifest_challenge", "candidate_assessments", "events"],
+  "properties": {
+    "protocol_id": {"const": "csweval_extended_event_discovery_output"},
+    "blind_document_id": {"type": "string", "pattern": "^LJ-B[0-9]{4}$"},
+    "article_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "judge_model": {"const": "gpt-5.6-sol"},
+    "manifest_challenge": {"$ref": "#/$defs/challenge"},
+    "candidate_assessments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["candidate_id", "classification", "speaker_slot", "function_labels", "rationale"],
+        "properties": {
+          "candidate_id": {"type": "string", "pattern": "^C[0-9]{3,}$"},
+          "classification": {"enum": ["TRUE_CSW", "NON_CSW", "UNCERTAIN"]},
+          "speaker_slot": {"enum": ["A", "B", "NARRATIVE_VOICE", "UNKNOWN"]},
+          "function_labels": {"type": "array", "items": {"type": "string", "minLength": 1}},
+          "rationale": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["proposal_id", "candidate_ids", "speaker_slot", "scene_id", "rationale"],
+        "properties": {
+          "proposal_id": {"type": "string", "pattern": "^P[0-9]{3,}$"},
+          "candidate_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^C[0-9]{3,}$"}},
+          "speaker_slot": {"enum": ["A", "B", "NARRATIVE_VOICE", "UNKNOWN"]},
+          "scene_id": {"type": "string", "pattern": "^S[0-9]{3,}$"},
+          "rationale": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "challenge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["raised", "reason"],
+      "properties": {"raised": {"type": "boolean"}, "reason": {"type": ["string", "null"]}}
+    }
+  }
+}

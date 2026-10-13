@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "csweval_extended_event_discovery_input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocol_id",
+    "blind_document_id",
+    "article_sha256",
+    "article_text",
+    "prompt_constraints",
+    "character_registry",
+    "mechanical_candidates"
+  ],
+  "properties": {
+    "protocol_id": {
+      "const": "csweval_extended_event_discovery_input"
+    },
+    "blind_document_id": {
+      "type": "string",
+      "pattern": "^LJ-B[0-9]{4}$"
+    },
+    "article_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "article_text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "prompt_constraints": {
+      "type": "object",
+      "required": [
+        "visible_prompt"
+      ],
+      "properties": {
+        "visible_prompt": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "character_registry": {
+      "$ref": "#/$defs/registry"
+    },
+    "mechanical_candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "candidate_id",
+          "start_codepoint",
+          "end_codepoint",
+          "text",
+          "segment_id"
+        ],
+        "properties": {
+          "candidate_id": {
+            "type": "string",
+            "pattern": "^C[0-9]{3,}$"
+          },
+          "start_codepoint": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "end_codepoint": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "segment_id": {
+            "type": "string",
+            "pattern": "^S[0-9]{3,}$"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "registry": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "character_slot",
+          "display_name",
+          "language_condition"
+        ],
+        "properties": {
+          "character_slot": {
+            "enum": [
+              "A",
+              "B"
+            ]
+          },
+          "display_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "language_condition": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}

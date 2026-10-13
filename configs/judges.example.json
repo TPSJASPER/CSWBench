@@ -1,0 +1,24 @@
+{
+  "_comment": [
+    "The two CSWEval quality judges are GPT-5.6-Sol and DeepSeek-V4-Flash.",
+    "Set valid OpenAI-compatible endpoints and key environment variables before live requests."
+  ],
+  "models": [
+    {
+      "model_id": "gpt-5.6-sol",
+      "base_url": "https://<your-endpoint>/v1",
+      "api_key_env": "CSWBENCH_API_KEY_OPENAI_STYLE_A",
+      "token_param": "max_completion_tokens",
+      "max_tokens": 30000,
+      "reasoning_effort": "high"
+    },
+    {
+      "model_id": "deepseek-v4-flash",
+      "base_url": "https://<your-endpoint>/v1",
+      "api_key_env": "CSWBENCH_API_KEY_DEEPSEEK",
+      "token_param": "max_tokens",
+      "max_tokens": 30000,
+      "reasoning_effort": "high"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "params_id": "csweval_extended_scoring_params",
+  "judge_models": [
+    "gpt-5.6-sol",
+    "deepseek-v4-flash"
+  ],
+  "event_dimensions": {
+    "d1_output_fields": [
+      "D1.role",
+      "D1.world"
+    ],
+    "d2_internal_checklist": [
+      "D2.1",
+      "D2.2",
+      "D2.3",
+      "D2.4",
+      "D2.5",
+      "D2.6",
+      "D2.7",
+      "D2.8"
+    ],
+    "d2_output_field": "D2.overall",
+    "d3_internal_checklist": [
+      "D3.1",
+      "D3.2",
+      "D3.3",
+      "D3.4",
+      "D3.5"
+    ],
+    "d3_output_field": "D3.overall",
+    "subdimension_scores_emitted": false,
+    "salience_labels": [
+      "S1",
+      "S2",
+      "S3"
+    ],
+    "salience_numeric_weight": {
+      "S1": 1,
+      "S2": 2,
+      "S3": 3
+    }
+  },
+  "whole_text_dimension_ids": [
+    "M-F1",
+    "M-F2A",
+    "M-F2B",
+    "M-F3.1",
+    "M-F3.2",
+    "M-F3.3",
+    "M-F3.4"
+  ],
+  "score_scale": {
+    "minimum": 1,
+    "maximum": 5
+  },
+  "aggregation": {
+    "within_judge_gate": "D1=5_TIMES_SCORABLE_PASS_SHARE",
+    "within_judge_total": "D1_PLUS_SALIENCE_WEIGHTED_D2_PLUS_SALIENCE_WEIGHTED_D3_PLUS_MEAN_SEVEN_MF",
+    "panel_total": "MEAN_OF_TWO_JUDGES_ARTICLE_LEVEL_DIMENSION_SCORES",
+    "maximum": 20
+  }
+}

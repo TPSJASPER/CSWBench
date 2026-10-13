@@ -1,0 +1,137 @@
+{
+  "$defs": {
+    "DiscoveryCandidate": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "pattern": "^C[0-9]{3,}$",
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "start_char": {
+          "minimum": 0,
+          "title": "Start Char",
+          "type": "integer"
+        },
+        "end_char": {
+          "exclusiveMinimum": 0,
+          "title": "End Char",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "text",
+        "start_char",
+        "end_char"
+      ],
+      "title": "DiscoveryCandidate",
+      "type": "object"
+    },
+    "LengthAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "formula_id": {
+          "minLength": 1,
+          "title": "Formula ID",
+          "type": "string"
+        },
+        "target": {
+          "minimum": 0,
+          "title": "Target",
+          "type": "integer"
+        },
+        "observed_count": {
+          "minimum": 0,
+          "title": "Observed Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "formula_id",
+        "target",
+        "observed_count"
+      ],
+      "title": "LengthAudit",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "run_id": {
+      "minLength": 1,
+      "title": "Run Id",
+      "type": "string"
+    },
+    "prompt_id": {
+      "minLength": 1,
+      "title": "Prompt Id",
+      "type": "string"
+    },
+    "text_id": {
+      "minLength": 1,
+      "title": "Text Id",
+      "type": "string"
+    },
+    "protocol_id": {
+      "const": "csweval_focused_discovery",
+      "default": "csweval_focused_discovery",
+      "title": "Protocol ID",
+      "type": "string"
+    },
+    "visible_prompt": {
+      "minLength": 1,
+      "title": "Visible Prompt",
+      "type": "string"
+    },
+    "normalized_story_text": {
+      "minLength": 1,
+      "title": "Normalized Story Text",
+      "type": "string"
+    },
+    "normalized_story_text_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Normalized Story Text Sha256",
+      "type": "string"
+    },
+    "candidates": {
+      "items": {
+        "$ref": "#/$defs/DiscoveryCandidate"
+      },
+      "title": "Candidates",
+      "type": "array"
+    },
+    "length_audit": {
+      "$ref": "#/$defs/LengthAudit"
+    },
+    "params_id": {
+      "minLength": 1,
+      "title": "Params ID",
+      "type": "string"
+    },
+    "params_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Params Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "run_id",
+    "prompt_id",
+    "text_id",
+    "visible_prompt",
+    "normalized_story_text",
+    "normalized_story_text_sha256",
+    "candidates",
+    "length_audit",
+    "params_id",
+    "params_sha256"
+  ],
+  "title": "DiscoveryInput",
+  "type": "object"
+}

@@ -1,0 +1,141 @@
+{
+  "_comment": [
+    "Twelve generation models, temperature 0.7, top-p 0.7, maximum output tokens 30000.",
+    "Qwen thinking is explicit in the public reproduction profile; the reported runs used provider-default thinking.",
+    "Only compatible endpoints can guarantee these request semantics; verify provider support before a live run."
+  ],
+  "models": [
+    {
+      "model_id": "gpt-5.6-sol",
+      "base_url": "https://<your-endpoint>/v1",
+      "api_key_env": "CSWBENCH_API_KEY_OPENAI_STYLE_A",
+      "token_param": "max_completion_tokens",
+      "max_tokens": 30000,
+      "stream": false,
+      "temperature": 0.7,
+      "top_p": 0.7,
+      "reasoning_effort": "medium"
+    },
+    {
+      "model_id": "gpt-5.6-terra",
+      "base_url": "https://<your-endpoint>/v1",
+      "api_key_env": "CSWBENCH_API_KEY_OPENAI_STYLE_A",
+      "token_param": "max_completion_tokens",
+      "max_tokens": 30000,
+      "stream": false,
+      "temperature": 0.7,
+      "top_p": 0.7,
+      "reasoning_effort": "medium"
+    },
+    {
+      "model_id": "gpt-5.5",
+      "base_url": "https://<your-endpoint>/v1",
+      "api_key_env": "CSWBENCH_API_KEY_OPENAI_STYLE_A",
+      "token_param": "max_tokens",
+      "max_tokens": 30000,
+      "stream": false,
+      "temperature": 0.7,
+      "top_p": 0.7,
+      "reasoning_effort": "medium"
+    },
+    {
+      "model_id": "gemini-3.5-flash",
+      "base_url": "https://<your-endpoint>/v1",
+      "api_key_env": "CSWBENCH_API_KEY_OPENAI_STYLE_B",
+      "token_param": "max_tokens",
+      "max_tokens": 30000,
+      "stream": false,
+      "temperature": 0.7,
+      "top_p": 0.7,
+      "reasoning_effort": "medium"
+    },
+    {
+      "model_id": "qwen3.7-plus",
+      "base_url": "https://<your-endpoint>/v1",
+      "api_key_env": "CSWBENCH_API_KEY_OPENAI_STYLE_C",
+      "token_param": "max_tokens",
+      "max_tokens": 30000,
+      "stream": false,
+      "temperature": 0.7,
+      "top_p": 0.7,
+      "enable_thinking": true
+    },
+    {
+      "model_id": "qwen3.7-max",
+      "base_url": "https://<your-endpoint>/v1",
+      "api_key_env": "CSWBENCH_API_KEY_OPENAI_STYLE_C",
+      "token_param": "max_tokens",
+      "max_tokens": 30000,
+      "stream": false,
+      "temperature": 0.7,
+      "top_p": 0.7,
+      "enable_thinking": true
+    },
+    {
+      "model_id": "deepseek-v4-pro",
+      "base_url": "https://<your-endpoint>/v1",
+      "api_key_env": "CSWBENCH_API_KEY_DEEPSEEK",
+      "token_param": "max_tokens",
+      "max_tokens": 30000,
+      "stream": false,
+      "temperature": 0.7,
+      "top_p": 0.7,
+      "reasoning_effort": "high"
+    },
+    {
+      "model_id": "deepseek-v4-flash",
+      "base_url": "https://<your-endpoint>/v1",
+      "api_key_env": "CSWBENCH_API_KEY_DEEPSEEK",
+      "token_param": "max_tokens",
+      "max_tokens": 30000,
+      "stream": false,
+      "temperature": 0.7,
+      "top_p": 0.7,
+      "reasoning_effort": "high"
+    },
+    {
+      "model_id": "MiniMax-M2.5",
+      "base_url": "https://<your-endpoint>/v1",
+      "api_key_env": "CSWBENCH_API_KEY_OPENAI_STYLE_D",
+      "token_param": "max_tokens",
+      "max_tokens": 30000,
+      "stream": true,
+      "enable_thinking": true,
+      "temperature": 0.7,
+      "top_p": 0.7
+    },
+    {
+      "model_id": "MiniMax-M2.7",
+      "base_url": "https://<your-endpoint>/v1",
+      "api_key_env": "CSWBENCH_API_KEY_OPENAI_STYLE_D",
+      "token_param": "max_tokens",
+      "max_tokens": 30000,
+      "stream": true,
+      "enable_thinking": true,
+      "temperature": 0.7,
+      "top_p": 0.7
+    },
+    {
+      "model_id": "qwen3.5-397b-a17b",
+      "base_url": "https://<your-endpoint>/v1",
+      "api_key_env": "CSWBENCH_API_KEY_OPENAI_STYLE_C",
+      "token_param": "max_tokens",
+      "max_tokens": 30000,
+      "stream": false,
+      "temperature": 0.7,
+      "top_p": 0.7,
+      "enable_thinking": true
+    },
+    {
+      "model_id": "qwen3.5-35b-a3b",
+      "base_url": "https://<your-endpoint>/v1",
+      "api_key_env": "CSWBENCH_API_KEY_OPENAI_STYLE_D",
+      "token_param": "max_tokens",
+      "max_tokens": 30000,
+      "stream": false,
+      "temperature": 0.7,
+      "top_p": 0.7,
+      "enable_thinking": true
+    }
+  ]
+}
