@@ -1,4 +1,10 @@
-# CSWBench
+<div align="center">
+  <img
+    src="assets/cswbench-logo.png"
+    alt="CSWBench"
+    width="400"
+  />
+</div>
 
 **CSWBench** is a benchmark for context-sensitive Chinese–English code-switching in creative writing. It provides **807** final narrative prompts: **407 Focused** and **400 Extended**. **CSWEval** evaluates switch events and whole-text organization using the released CSWEval rubric.
 
